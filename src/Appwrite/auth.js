@@ -11,6 +11,37 @@ export class AuthService {
         .setProject(config.appwriteProjectId)
         this.account = new Account(this.client)
     }
+
+    async createAccount({email, password, name}) {
+        try {
+            const userAccount = await this.account.create(ID.unique(), email, password, name);
+            if(userAccount){
+                return this.login({email, password})
+            }else{
+                return userAccount
+            }
+        } catch (error) {
+            return error
+        }
+    }
+
+    async login({email, password}) {
+        try {
+            return await this.account.createEmailPasswordSession(email, password)
+        } catch (error) {
+            return error
+        }
+    }
+
+    async getCurrentUser() {
+        try {
+            return await this.account.get()
+        } catch (error) {
+            return error
+        }
+
+        return null
+    }
 }
 
 const authService = new AuthService()
