@@ -104,7 +104,6 @@ export class Service {
         try {
             await this.bucket.deleteFile(
                 config.appwriteBucketId,
-                ID.unique(),
                 fileId
             )
             return true
