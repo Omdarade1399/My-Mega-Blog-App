@@ -1,4 +1,4 @@
-import config from "../Conf/config";
+import config from "../Conf/config.js";
 import { Client, ID, Databases, Storage, Query } from "appwrite";
 
 export class Service {
@@ -103,7 +103,7 @@ export class Service {
     async deleteFile(fileId) {
         try {
             await this.bucket.deleteFile(
-                config.appwriteBucketId,
+                config.appwriteBucketId, 
                 fileId
             )
             return true
