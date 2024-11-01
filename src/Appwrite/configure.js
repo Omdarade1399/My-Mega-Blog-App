@@ -43,7 +43,7 @@ export class Service{
                     title,
                     content,
                     featuredImage,
-                    status
+                    status,
 
                 }
             )
@@ -86,7 +86,7 @@ export class Service{
             return await this.databases.listDocuments(
                 config.appwriteDatabaseId,
                 config.appwriteCollectionId,
-                queries
+                queries,
             )
         } catch (error) {
             console.log("Appwrite serive :: getPosts :: error", error);

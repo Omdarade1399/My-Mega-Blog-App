@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import appwriteService from "../Appwrite/configure";
 import {Container, PostCard} from '../Components'
+import { login } from '../Store/authSlice';
 
 function Home() {
     const [posts, setPosts] = useState([])
@@ -27,7 +28,22 @@ function Home() {
                     </Container>
                 </div>
             )
-    }else{
+    }else if(!login){
+        return (
+            <div className="w-full py-8 mt-4 text-center">
+                <Container>
+                    <div className="flex flex-wrap">
+                        <div className="p-2 w-full">
+                            <h1 className="text-2xl font-bold hover:text-gray-500">
+                                Please Login or SignUp
+                            </h1>
+                        </div>
+                    </div>
+                </Container>
+            </div>
+        )
+    }
+    else{
          return (
         <div className='w-full py-8'>
             <Container>
