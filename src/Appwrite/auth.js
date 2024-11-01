@@ -7,49 +7,53 @@ export class AuthService {
 
     constructor() {
         this.client
-        .setEndpoint(config.appwriteUrl)
-        .setProject(config.appwriteProjectId)
-        this.account = new Account(this.client)
+            .setEndpoint(config.appwriteUrl)
+            .setProject(config.appwriteProjectId);
+        this.account = new Account(this.client);
+            
     }
 
     async createAccount({email, password, name}) {
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
-            if(userAccount){
-                return this.login({email, password})
-            }else{
-                return userAccount
+            if (userAccount) {
+                return this.login({email, password});
+            } else {
+               return  userAccount;
             }
         } catch (error) {
-            return error
+            return error;
         }
     }
 
     async login({email, password}) {
         try {
-            return await this.account.createEmailPasswordSession(email, password)
+            return await this.account.createEmailSession(email, password);
         } catch (error) {
-            return error
+            return error;
         }
     }
 
     async getCurrentUser() {
         try {
-            return await this.account.get()
+            return await this.account.get();
         } catch (error) {
-            return error
+            console.log("Appwrite serive :: getCurrentUser :: error", error);
         }
+
+        return null;
     }
 
     async logout() {
+
         try {
-            return await this.account.deleteSessions()
+            await this.account.deleteSessions();
         } catch (error) {
-            return error
+            console.log("Appwrite serive :: logout :: error", error);
         }
     }
 }
 
-const authService = new AuthService()
+const authService = new AuthService();
 
 export default authService
