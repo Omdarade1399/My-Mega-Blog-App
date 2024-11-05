@@ -38,12 +38,12 @@ export default function Post() {
             <div className="w-full mb-6">
                     <h1 className="text-3xl font-bold">{post.title}</h1>
                 </div>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className="w-full flex justify-center mb-4 relative border-2 border-white rounded-xl p-2 shadow-lg">
                     <img
                         src={appwriteService.getFilePreview(post.featuredImage)}
                         alt={post.title}
                         className="rounded-xl"
-                    />
+                    /> 
 
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
